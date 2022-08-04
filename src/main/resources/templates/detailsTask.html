@@ -1,0 +1,58 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/main.html">
+<div layout:fragment="mainContent">
+    <div class="row mt-3">
+        <div class="col-12 mx-auto">
+            <h5 class="card-title" th:text="${folder.name}"></h5>
+            <div class="div col-12">
+                <form th:action="@{'/updateTask'}" method="post">
+                    <input type="hidden" name="taskId" th:value="${task.id}">
+                    <div class="row">
+                        <div class="col-12">
+                            <label>Name: </label>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <input class="form-control" type="text" name="name" placeholder="name"
+                                       th:value="${task.name}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <label>Description: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <textarea  class="form-control" name="description"
+                                          placeholder="description"
+                                          th:text="${task.description}"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <select class="form-select" name="status" th:selected="${task.status}">
+                                    <option value="0">TO DO</option>
+                                    <option value="1">IN TEST</option>
+                                    <option value="2">DONE</option>
+                                    <option value="3">FAILED</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                    <button class="btn btn-success">SAVE</button>
+                </form>
+                    <form th:action="@{'/deleteTask'}" method="post">
+                        <input type="hidden" th:value="${task.id}" name="taskId" >
+                        <input type="hidden" th:value="${folder.id}" name="folderId">
+                    <button    class=" btn btn-danger float-end"> DELETE </button>
+                    </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
